@@ -11,7 +11,7 @@ func CorsHandlerFunc(inner http.HandlerFunc) http.HandlerFunc {
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Add("Access-Control-Allow-Method","POST, OPTIONS, GET, HEAD, PUT, PATCH, DELETE")
 		w.Header().Add("Access-Control-Allow-Headers","X-Requested-With, Content-Type")
-		w.Header().Set("Content-Type","application/json")
+		w.Header().Set("Content-Type","application/json;charset=utf-8")
 		inner.ServeHTTP(w, r)
 	}
 }

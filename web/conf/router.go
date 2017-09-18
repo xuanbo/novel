@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
+	"github.com/xuanbo/novel/core/model"
+	"github.com/xuanbo/novel/web/util"
 )
 
 var Router = mux.NewRouter()
@@ -44,6 +46,18 @@ func RegisterController(controller *Controller) {
 	}
 }
 
+type NotFoundHandler struct {
+}
+
+func (NotFoundHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type","application/json;charset=utf-8")
+	w.Write(util.ToJsonByte(model.NotFound()))
+}
+
 func StaticResource(pathPrefix string) {
 	Router.PathPrefix(pathPrefix).Handler(http.FileServer(http.Dir(".")))
+}
+
+func UseNotFound()  {
+	Router.NotFoundHandler = NotFoundHandler{}
 }

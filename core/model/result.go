@@ -13,3 +13,7 @@ func Ok(data interface{}) *Result {
 func Fail(data interface{}) *Result {
 	return &Result{500, "Fail", data}
 }
+
+func NotFound() *Result {
+	return &Result{404, "Not Found", ""}
+}
