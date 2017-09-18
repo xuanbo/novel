@@ -1,12 +1,16 @@
 package main
 
 import (
+	"net/http"
 	"github.com/xuanbo/novel/web/conf"
 	"github.com/xuanbo/novel/web/controller"
-	"net/http"
+	"log"
 )
 
 func main() {
+	conf.StaticResource("/ui/static")
 	conf.RegisterController(controller.UserController)
-	http.ListenAndServe(":9000", conf.Router)
+	addr := ":9000"
+	log.Printf("start server on %s.\n", addr)
+	http.ListenAndServe(addr, conf.Router)
 }

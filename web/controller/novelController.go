@@ -3,30 +3,33 @@ package controller
 import (
 	"net/http"
 	"encoding/json"
+	"strings"
 	"github.com/xuanbo/novel/web/conf"
 	"github.com/gorilla/mux"
 	"github.com/xuanbo/novel/core/source"
 	"github.com/xuanbo/novel/core/model"
-	"strings"
 )
 
-var UserController = &conf.Controller{
+var UserController = &conf.Controller {
 	Name: "novelController",
 	Path: "/novel",
-	Routes: &[]conf.Route {
+	Routes: &conf.Routes {
 		{
 			Match: "/search/{q}",
-			Methods: &[]string{conf.GET},
+			Methods: []string{conf.GET},
+			HandleFuncName: "search",
 			HandleFunc: search,
 		},
 		{
 			Match: "",
-			Methods: &[]string{conf.GET},
+			Methods: []string{conf.GET},
+			HandleFuncName: "getNovel",
 			HandleFunc: getNovel,
 		},
 		{
 			Match: "/chapter",
-			Methods: &[]string{conf.GET},
+			Methods: []string{conf.GET},
+			HandleFuncName: "getChapter",
 			HandleFunc: getChapter,
 		},
 	},

@@ -13,15 +13,15 @@ type Biquge struct {
 }
 
 const (
-	SOURCE_TYPE = 1
-	SEARCH_URL = "http://www.biquge5200.com/modules/article/search.php?searchkey="
+	SourceTypeBiquge = 1
+	BiqugeSearchUrl = "http://www.biquge5200.com/modules/article/search.php?searchkey="
 )
 
 var BiqugeFetcher = &Biquge{}
 
 // 实现 source.Fetcher 接口
 func (Biquge) Search(word string) (*[]model.Search, error) {
-	url := SEARCH_URL + url.PathEscape(word)
+	url := BiqugeSearchUrl + url.PathEscape(word)
 	document, err := goquery.NewDocument(url)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func parseSearch(doc *goquery.Document) *[]model.Search {
 
 // 解析搜索结果条目
 func parseSearchItem(selection *goquery.Selection) model.Search {
-	search := model.Search{Source: SOURCE_TYPE}
+	search := model.Search{Source: SourceTypeBiquge}
 	selection.Find("td").Each(func(i int, selection *goquery.Selection) {
 		switch i {
 			case 0:
@@ -98,7 +98,7 @@ func parseNovel(doc *goquery.Document) *model.Novel {
 		LastUpdateTime: lastUpdateTime,
 		Description: description,
 		Chapters: parseNovelChapters(doc),
-		Source: 1,
+		Source: SourceTypeBiquge,
 	}
 	return novel
 }
