@@ -35,13 +35,15 @@ var UserController = &conf.Controller {
 	},
 }
 
+// 关键词检索小说
 func search(writer http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	q := vars["q"]
 	result, err := source.BiqugeFetcher.Search(q)
-	doResult(result, err, writer)
+	sendResult(result, err, writer)
 }
 
+// 获取小说信息
 func getNovel(writer http.ResponseWriter, req *http.Request) {
 	url := req.URL.Query().Get("url")
 	if strings.Trim(url, "") == "" {
@@ -49,9 +51,10 @@ func getNovel(writer http.ResponseWriter, req *http.Request) {
 		return
 	}
 	result, err := source.BiqugeFetcher.FetchNovel(url)
-	doResult(result, err, writer)
+	sendResult(result, err, writer)
 }
 
+// 获取小说章节信息
 func getChapter(writer http.ResponseWriter, req *http.Request) {
 	url := req.URL.Query().Get("url")
 	if strings.Trim(url, "") == "" {
@@ -59,10 +62,10 @@ func getChapter(writer http.ResponseWriter, req *http.Request) {
 		return
 	}
 	result, err := source.BiqugeFetcher.FetchChapter(url)
-	doResult(result, err, writer)
+	sendResult(result, err, writer)
 }
 
-func doResult(result interface{}, err error, writer http.ResponseWriter) {
+func sendResult(result interface{}, err error, writer http.ResponseWriter) {
 	if err != nil {
 		writer.Write(util.ToJsonByte(model.Fail("")))
 		return
