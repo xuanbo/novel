@@ -39,11 +39,7 @@ func search(writer http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	q := vars["q"]
 	result, err := source.BiqugeFetcher.Search(q)
-	if err != nil {
-		writer.Write(util.ToJsonByte(model.Fail("")))
-		return
-	}
-	writer.Write(util.ToJsonByte(model.Ok(result)))
+	doResult(result, err, writer)
 }
 
 func getNovel(writer http.ResponseWriter, req *http.Request) {
@@ -53,11 +49,7 @@ func getNovel(writer http.ResponseWriter, req *http.Request) {
 		return
 	}
 	result, err := source.BiqugeFetcher.FetchNovel(url)
-	if err != nil {
-		writer.Write(util.ToJsonByte(model.Fail("")))
-		return
-	}
-	writer.Write(util.ToJsonByte(model.Ok(result)))
+	doResult(result, err, writer)
 }
 
 func getChapter(writer http.ResponseWriter, req *http.Request) {
@@ -67,6 +59,10 @@ func getChapter(writer http.ResponseWriter, req *http.Request) {
 		return
 	}
 	result, err := source.BiqugeFetcher.FetchChapter(url)
+	doResult(result, err, writer)
+}
+
+func doResult(result interface{}, err error, writer http.ResponseWriter) {
 	if err != nil {
 		writer.Write(util.ToJsonByte(model.Fail("")))
 		return

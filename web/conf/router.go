@@ -32,8 +32,7 @@ func RegisterController(controller *Controller) {
 	path := controller.Path
 	log.Printf("register controller: %s.\n", controller.Name)
 	routes := controller.Routes
-	for i := 0; i < len(*routes); i++ {
-		route := (*routes)[i]
+	for _, route := range *routes {
 		match := path + route.Match
 		methods := route.Methods
 		handleFuncName := route.HandleFuncName
@@ -50,7 +49,7 @@ type NotFoundHandler struct {
 }
 
 func (NotFoundHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type","application/json;charset=utf-8")
+	w.Header().Set(CONTENT_TYPE, APPLICATION_JSON)
 	w.Write(util.ToJsonByte(model.NotFound()))
 }
 
@@ -58,6 +57,6 @@ func StaticResource(pathPrefix string) {
 	Router.PathPrefix(pathPrefix).Handler(http.FileServer(http.Dir(".")))
 }
 
-func UseNotFound()  {
+func UseNotFound() {
 	Router.NotFoundHandler = NotFoundHandler{}
 }
