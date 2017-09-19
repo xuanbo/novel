@@ -8,7 +8,12 @@ import (
 	"github.com/xuanbo/novel/web/util"
 )
 
-var Router = mux.NewRouter()
+var Router = newRouter()
+
+func newRouter() *mux.Router {
+	router := mux.NewRouter()
+	return router
+}
 
 // 定义路由
 type Route struct {
@@ -48,13 +53,13 @@ func RegisterController(controller *Controller) {
 type NotFoundHandler struct {
 }
 
-func (NotFoundHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set(CONTENT_TYPE, APPLICATION_JSON)
+func (n NotFoundHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	AllowCors(w)
 	w.Write(util.ToJsonByte(model.NotFound()))
 }
 
-func StaticResource(pathPrefix string) {
-	Router.PathPrefix(pathPrefix).Handler(http.FileServer(http.Dir(".")))
+func StaticResource(pathPrefix string, stripPrefix string) {
+	Router.PathPrefix(pathPrefix).Handler(http.StripPrefix(stripPrefix, http.FileServer(http.Dir("."))))
 }
 
 func UseNotFound() {
