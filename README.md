@@ -6,6 +6,13 @@ golang 爬取小说资源
 
 * [笔趣阁](http://www.biquge5200.com/)
 
+## 简易界面
+
+![首页](https://raw.githubusercontent.com/xuanbo/novel/master/pic/home.png)
+![小说](https://raw.githubusercontent.com/xuanbo/novel/master/pic/novel.png)
+![章节](https://raw.githubusercontent.com/xuanbo/novel/master/pic/chapter.png)
+![阅读](https://raw.githubusercontent.com/xuanbo/novel/master/pic/read.png)
+
 ## api接口
 
 * 启动后端
