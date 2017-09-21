@@ -6,6 +6,7 @@ import index from '@/components/index'
 
 import novelSearch from '@/components/novel/search'
 import novelIndex from '@/components/novel/index'
+import novelRead from '@/components/novel/read'
 
 export default new VueRouter({
   routes: [{
@@ -20,5 +21,9 @@ export default new VueRouter({
     path: '/novel',
     name: 'novelIndex',
     component: novelIndex
+  }, {
+    path: '/novel/read',
+    name: 'novelRead',
+    component: novelRead
   }]
 })

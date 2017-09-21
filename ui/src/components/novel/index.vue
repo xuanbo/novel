@@ -3,25 +3,21 @@
     <top></top>
     <div style="margin-top: 20px">
       <Row>
-        <Col span="20" offset="2" style="background:#eee;padding: 20px">
+        <Col span="20" offset="2" style="background:#eee; padding: 20px">
           <Card :bordered="false" >
-            <p slot="title">{{ novel.name }} -- {{ novel.author }} -- {{ novel.lastUpdateTime }}</p>
+            <p slot="title">
+              {{ novel.name }} -- {{ novel.author }} -- {{ novel.lastUpdateTime }}
+            </p>
             <p>{{ novel.description }}</p>
           </Card>
         </Col>
       </Row>
-        <Row style="margin-top: 10px">
-          <Col span="6" v-for="(chapter, index) in novel.chapters" key="chapter.name" style="padding: 5px">
-            <Tag color="blue" @click.native="show(index)">{{chapter.name}}</Tag>
-          </Col>
-        </Row>
-
-        <Modal v-model="showChapter" width="1200">
-          <h1>{{ chapter.name }}</h1>
-          <div>
-            <pre>{{ chapter.content }}</pre>
-          </div>
-        </Modal>
+      <Row style="margin-top: 10px">
+        <Col span="6" v-for="(chapter, index) in novel.chapters" key="chapter.name" style="padding: 5px">
+          <Tag color="blue" @click.native="show(index)">{{chapter.name}}</Tag>
+        </Col>
+      </Row>
+      <BackTop></BackTop>
     </div>
   </div>
 </template>
@@ -42,6 +38,11 @@ export default {
   components: {
     top: top
   },
+  computed: {
+    showLook: function () {
+      return this.novel.chapters.length > 0
+    }
+  },
   mounted () {
     this.fetchNovel()
   },
@@ -52,18 +53,8 @@ export default {
         this.novel = resp
       })
     },
-    fetchChapter: function (chapterUrl) {
-      let url = '/novel/chapter?url=' + chapterUrl
-      this.$http.get(url).then(resp => {
-        this.chapter = resp
-        this.toggleChapter()
-      })
-    },
-    toggleChapter: function () {
-      this.showChapter = !this.showChapter
-    },
-    show (index) {
-      this.fetchChapter(this.novel.chapters[index].url)
+    show: function (index) {
+      this.$router.push({name: 'novelRead', query: { url: this.url, index: index }})
     }
   }
 }

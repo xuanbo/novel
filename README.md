@@ -6,15 +6,15 @@ golang 爬取小说资源
 
 * [笔趣阁](http://www.biquge5200.com/)
 
-## 启动项目
+## api接口
+
+* 启动后端
 
 ```
 go run main.go
 ```
 
-## 如何使用
-
-以小说《圣墟》为例。
+* 以小说《圣墟》为例。
 
 * 搜索小说资源`http://localhost:9000/novel/search/圣墟`
 
@@ -116,7 +116,7 @@ go run main.go
 
 ## 后期完善
 
-* 提供web界面进行在线浏览小说资源。
+* [提供web界面进行在线浏览小说资源](https://github.com/xuanbo/novel/blob/master/UI.MD)。(已完成)
 * 爬取其他小说网站的资源。
 * 建立自己的数据库存储爬取得小说信息。（暂不考虑）
 * 建立小说网站。（暂不考虑）
