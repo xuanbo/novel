@@ -122,7 +122,7 @@ go run main.go
 
 ## 稳定版
 
-下载根目录下novel.exe文件
+[地址](https://github.com/xuanbo/novel/releases)
 
 ## 目录结构
 
