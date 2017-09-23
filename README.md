@@ -8,10 +8,13 @@ golang 爬取小说资源
 
 ## 简易界面
 
-![首页](https://raw.githubusercontent.com/xuanbo/novel/master/pic/home.png)
-![小说](https://raw.githubusercontent.com/xuanbo/novel/master/pic/novel.png)
-![章节](https://raw.githubusercontent.com/xuanbo/novel/master/pic/chapter.png)
-![阅读](https://raw.githubusercontent.com/xuanbo/novel/master/pic/read.png)
+![首页](https://github.com/xuanbo/novel/blob/master/pic/home.png)
+
+![小说](https://github.com/xuanbo/novel/blob/master/pic/novel.png)
+
+![章节](https://github.com/xuanbo/novel/blob/master/pic/chapter.png)
+
+![阅读](https://github.com/xuanbo/novel/blob/master/pic/read.png)
 
 ## api接口
 
@@ -116,6 +119,18 @@ go run main.go
     }
 }
 ```
+
+## 稳定版
+
+下载根目录下novel.exe文件
+
+## 目录结构
+
+* core/ 爬取资源模块
+* web/ 路由模块
+* ui/ 前端vue项目
+* static/ vue项目编译后的静态资源
+* pic/ 示例图片
 
 ## 不足
 

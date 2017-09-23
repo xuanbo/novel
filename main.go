@@ -9,10 +9,10 @@ import (
 
 func main() {
 	conf.UseNotFound()
-	conf.StaticResource("/static/ui/dist", "/static/")
+	conf.StaticResource("/static/")
 	conf.RegisterController(controller.UserController)
 
 	addr := ":9000"
-	log.Printf("start server on %s.\n", addr)
+	log.Printf("listen on %s\n", "http://localhost:9000/static/")
 	log.Fatal(http.ListenAndServe(addr, conf.Router))
 }

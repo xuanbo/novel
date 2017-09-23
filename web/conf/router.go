@@ -58,8 +58,8 @@ func (n NotFoundHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Write(util.ToJsonByte(model.NotFound()))
 }
 
-func StaticResource(pathPrefix string, stripPrefix string) {
-	Router.PathPrefix(pathPrefix).Handler(http.StripPrefix(stripPrefix, http.FileServer(http.Dir("."))))
+func StaticResource(pathPrefix string) {
+	Router.PathPrefix(pathPrefix).Handler(http.FileServer(http.Dir(".")))
 }
 
 func UseNotFound() {
